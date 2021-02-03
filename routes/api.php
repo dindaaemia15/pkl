@@ -22,3 +22,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Api Provinsi
 Route::resource('provinsi',ProvinsiController::class);
 Route::get('Rw', [ApiController::class, 'rw']);
+Route::get('Provinsi', [ApiController::class, 'provinsi']);
