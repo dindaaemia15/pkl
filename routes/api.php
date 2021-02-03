@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\ProvinsiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\ApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Api Provinsi
 Route::resource('provinsi',ProvinsiController::class);
+Route::get('Rw', [ApiController::class, 'rw']);
