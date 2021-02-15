@@ -14,12 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard.index');
 });
+
+// Route FrontEnd
+use App\Http\Controllers\DashboardController;
+Route::resource('/', DashboardController::class);
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 use App\Http\Controllers\ProvinsiController;
 Route::resource('provinsi',ProvinsiController::class);
@@ -47,4 +52,3 @@ Route::resource('kasus',KasusController::class);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

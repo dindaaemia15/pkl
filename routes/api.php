@@ -23,13 +23,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('provinsi',ProvinsiController::class);
 Route::get('Rw', [ApiController::class, 'rw']);
 Route::get('Provinsi', [ApiController::class, 'provinsi']);
-Route::get('Kotas', [ApiController::class, 'kota']);
+Route::get('Kota', [ApiController::class, 'kota']);
 Route::get('Kecamatan', [ApiController::class, 'kecamatan']);
  Route::get('Kelurahan', [ApiController::class, 'kelurahan']);
  Route::get('All', [ApiController::class, 'all']);
  Route::get('Positif', [ApiController::class, 'positif']);
  Route::get('Sembuh', [ApiController::class, 'sembuh']);
  Route::get('Meninggal', [ApiController::class, 'meninggal']);
+ Route::get('/global', [ApiController::class, 'global']);
 
 
 // API CRUD
@@ -38,3 +39,4 @@ Route::get('Kecamatan', [ApiController::class, 'kecamatan']);
  Route::get('/provinsi/{id}', [ProvinsiController::class, 'show']);
  Route::put('/provinsi/update/{id}', [ProvinsiController::class, 'update']);
  Route::delete('/provinsi/{id}', [ProvinsiController::class, 'destroy']);
+ 

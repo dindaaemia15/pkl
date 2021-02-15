@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Provinsi;
@@ -208,6 +209,7 @@ class ApiController extends Controller
         }
 
 
+
     public function Rw()
     {
         $rw = DB::table('trackings')
@@ -242,5 +244,28 @@ class ApiController extends Controller
                            ],
                 'message' => 'Berhasil'
             ], 200);
+    }
+
+    public $data = [];
+    public function global()
+    {
+        $response = Http::get('https://api.kawalcorona.com')->json();
+        foreach ($response as $data => $val) {
+            $raw = $val ['attributes' ];
+            $res = ['Negara' => $raw['Country_Region'],
+                    'Positif' => $raw['Confirmed'],
+                    'Sembuh' => $raw['Recovered'],
+                    'Meninggal' => $raw['Deaths']
+            ];
+
+            array_push ($this->data, $res);
+        }
+            $data = [
+                'success' => true,
+                'data' => $this->data,
+                'message' => 'Berhasil'
+            ];
+
+            return response()->json($data, 200);
     }
 }

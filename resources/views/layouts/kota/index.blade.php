@@ -38,7 +38,7 @@
             <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
                     <thead>
-                      <tr class="bg-fuchsia">
+                      <tr class="bg-green">
                         <th scope="col">No</th>
                         <th scope="col">Kode Kota</th>
                         <th scope="col">Provinsi</th>
