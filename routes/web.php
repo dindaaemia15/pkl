@@ -1,7 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProvinsiController;
+use App\Http\Controllers\KotaController;
+use App\Http\Controllers\KecamatanController;
+use App\Http\Controllers\KelurahanController;
+use App\Http\Controllers\RwController;
+use App\Http\Controllers\TrackingController;
+use App\Http\Controllers\NegaraController;
+use App\Http\Controllers\KasusController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,32 +30,25 @@ Route::resource('/', DashboardController::class);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['prefix' => 'beranda', 'midlleware' => ['auth']], function () {
+    Route::get('/',[App\Http\Controllers\BerandaController::class,'index'])->name('beranda');
 
-
-use App\Http\Controllers\ProvinsiController;
 Route::resource('provinsi',ProvinsiController::class);
 
-use App\Http\Controllers\KotaController;
 Route::resource('kota',KotaController::class);
 
-use App\Http\Controllers\KecamatanController;
 Route::resource('kecamatan',KecamatanController::class);
 
-use App\Http\Controllers\KelurahanController;
 Route::resource('kelurahan',KelurahanController::class);
 
-use App\Http\Controllers\RwController;
 Route::resource('rw',RwController::class);
 
-use App\Http\Controllers\TrackingController;
 Route::resource('tracking',TrackingController::class);
 
-use App\Http\Controllers\NegaraController;
 Route::resource('negara',NegaraController::class);
 
-use App\Http\Controllers\KasusController;
 Route::resource('kasus',KasusController::class);
 
 Auth::routes();
 
+});
