@@ -12,8 +12,6 @@ use Illuminate\Support\Carbon;
 class DashboardController extends Controller
 {
 
-    
-
     public function index()
     {
         // Count Up
@@ -23,6 +21,7 @@ class DashboardController extends Controller
             ->sum('sembuh');
         $meninggal = DB::table('trackings')
             ->sum('meninggal');
+
         $global = file_get_contents('https://api.kawalcorona.com/positif');
         $posglobal = json_decode($global, TRUE);
 
@@ -31,16 +30,16 @@ class DashboardController extends Controller
 
         // Table Provinsi
         $tampil = DB::table('provinsis')
-                  ->select('provinsis.id', 'provinsis.nama_provinsi', 'provinsis.kode_provinsi',
-                      DB::raw('sum(trackings.positif) as positif'),
-                      DB::raw('sum(trackings.sembuh) as sembuh'),
-                      DB::raw('sum(trackings.meninggal) as meninggal'))
-                  ->join('kotas', 'provinsis.id', '=', 'kotas.id_provinsi')
-                  ->join('kecamatans', 'kotas.id', '=', 'kecamatans.id_kota')
-                  ->join('kelurahans', 'kecamatans.id', '=', 'kelurahans.id_kecamatan')
-                  ->join('rws', 'kelurahans.id', '=', 'rws.id_kelurahan')
-                  ->join('trackings', 'rws.id', '=', 'trackings.id_rw')
-                  ->groupBy('provinsis.id')
+                  ->join('kotas','kotas.id_provinsi','=','provinsis.id')
+                  ->join('kecamatans','kecamatans.id_kota','=','kotas.id')
+                  ->join('kelurahans','kelurahans.id_kecamatan','=','kecamatans.id')
+                  ->join('rws','rws.id_kelurahan','=','kelurahans.id')
+                  ->join('trackings','trackings.id_rw','=','rws.id')
+                  ->select('nama_provinsi',
+                          DB::raw('SUM(trackings.positif) as Positif'),
+                          DB::raw('SUM(trackings.sembuh) as Sembuh'),
+                          DB::raw('SUM(trackings.meninggal) as Meninggal'))
+                  ->groupBy('nama_provinsi')->orderBy('nama_provinsi','ASC')
                   ->get();
 
         // Table Global
@@ -50,5 +49,5 @@ class DashboardController extends Controller
         return view('dashboard.index',compact('positif','sembuh','meninggal','posglobal', 'tanggal','tampil','dunia'));
     }
 
-
+    
 }
