@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-use DB;
 use App\Http\Models\Provinsi;
-use App\Http\Models\Kota;
-use App\Http\Models\Kecamatan;
-use App\Http\Models\Kelurahan;
 use App\Http\Models\RW;
 use App\Http\Models\Tracking;
+use DB;
 use Illuminate\Support\Carbon;
 
 class DashboardController extends Controller
@@ -20,21 +17,12 @@ class DashboardController extends Controller
     public function index()
     {
         // Count Up
-        $positif = DB::table('rws')
-            ->select('trackings.positif',
-            'trackings.sembuh', 'trackings.meninggal')
-            ->join('trackings','rws.id','=','trackings.id_rw')
-            ->sum('trackings.positif'); 
-        $sembuh = DB::table('rws')
-            ->select('trackings.positif',
-            'trackings.sembuh','trackings.meninggal')
-            ->join('trackings','rws.id','=','trackings.id_rw')
-            ->sum('trackings.sembuh');
-        $meninggal = DB::table('rws')
-            ->select('trackings.positif',
-            'trackings.sembuh','trackings.meninggal')
-            ->join('trackings','rws.id','=','trackings.id_rw')
-            ->sum('trackings.meninggal');
+        $positif = DB::table('trackings')
+            ->sum('positif'); 
+        $sembuh = DB::table('trackings')
+            ->sum('sembuh');
+        $meninggal = DB::table('trackings')
+            ->sum('meninggal');
         $global = file_get_contents('https://api.kawalcorona.com/positif');
         $posglobal = json_decode($global, TRUE);
 
