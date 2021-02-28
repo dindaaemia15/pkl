@@ -9,6 +9,8 @@ use App\Http\Controllers\RwController;
 use App\Http\Controllers\TrackingController;
 use App\Http\Controllers\NegaraController;
 use App\Http\Controllers\KasusController;
+use App\Http\Controllers\DashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,13 +22,13 @@ use App\Http\Controllers\KasusController;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard.index');
-});
+// Route::get('/', function () {
+//     return view('dashboard.index');
+// });
 
 // Route FrontEnd
-use App\Http\Controllers\DashboardController;
-Route::resource('/', DashboardController::class);
+
+Route::get('/', [DashboardController::class, 'index']);
 
 Auth::routes();
 
