@@ -43,14 +43,14 @@
   <header id="header" class="top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="index.html">Tracking<span>Covid</span></a></h1>
+      <h1 class="logo mr-auto"><a href="/">Tracking<span>Covid</span></a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt=""></a>-->
 
       <nav class="nav-menu d-none d-lg-block navbar-fixed-top">
         <ul>
-          <li class="active"><a href="http://127.0.0.1:8000/">Halaman Utama</a></li>
-          <li class="drop-down"><a href="">Data Kasus</a>
+          <li class="active"><a href="#main">Halaman Utama</a></li>
+          <li class="drop-down"><a href="javascript:void(0)">Data Kasus</a>
             <ul>
               <li><a href="#provinsi">Data Kasus Lokal</a></li>
               <li><a href="#global">Data Kasus Global</a></li>
@@ -58,7 +58,7 @@
           </li>
           <li><a href="#services">Pelayanan</a></li>
           <li><a href="#faq">F.A.Q</a></li>
-          <li><a href="#contact">Kontak</a></li>
+          <li><a href="#footer">Kontak</a></li>
 
         </ul>
       </nav><!-- .nav-menu -->
